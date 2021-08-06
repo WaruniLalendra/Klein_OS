@@ -11,7 +11,7 @@ all: kernel.elf
 kernel.elf: $(OBJECTS)
 		ld $(LDFLAGS) $(OBJECTS) -o kernel.elf
 
-minios.iso: kernel.elf
+os.iso: kernel.elf
 		cp kernel.elf iso/boot/kernel.elf
 		genisoimage -R                              \
 								-b boot/grub/stage2_eltorito    \
@@ -24,7 +24,7 @@ minios.iso: kernel.elf
 								-o os.iso                       \
 								iso
 
-run: minios.iso
+run: os.iso
 		bochs -f bochsrc.txt -q
 
 %.o: %.c
